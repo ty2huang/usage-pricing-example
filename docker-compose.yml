@@ -1,0 +1,24 @@
+services:
+  app:
+    image: timhuang95/usage-analytics-app:v2024.2
+    depends_on:
+      - squirrels
+      - backend
+    ports:
+      - 80:3000
+    volumes:
+      - ./.env:/app/.env:ro
+
+  backend:
+    image: timhuang95/usage-analytics-backend:v2024.1
+    ports:
+      - 8000:8000
+    volumes:
+      - ./.env:/backend/.env:ro
+
+  squirrels:
+    image: timhuang95/usage-analytics-squirrels:v2024.1
+    ports:
+      - 4465:4465
+    volumes:
+      - ./env.yml:/squirrels/env.yml:ro
